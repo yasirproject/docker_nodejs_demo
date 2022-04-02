@@ -1,3 +1,9 @@
+# Change the following to your desired values:
+#   __ACCOUNT_NUMBER__
+#   __ECR_REGION__
+#   __ECR_REPOSITORY_NAME__
+#   __ECS_CONTAINER_NAME__
+
 version: 0.2
 phases:
   install:
@@ -6,8 +12,6 @@ phases:
   pre_build:
     commands:
       - echo Logging in to Amazon ECR...
-      #- aws ecr get-login --no-include-email --region us-east-1
-      #- aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin 678878256416.dkr.ecr.us-east-1.amazonaws.com
       - aws --version
       - $(aws ecr get-login --region us-east-1 --no-include-email)
       - 678878256416.dkr.ecr.us-east-1.amazonaws.com/cicd-yasir
@@ -15,16 +19,17 @@ phases:
       - IMAGE_TAG=${COMMIT_HASH:=latest}
   build:
     commands:
-      #- echo Build started on `date`
-      #- echo Building Docker test image...
-      #- docker build -t $IMAGE_REPO_NAME:$TEST_IMAGE_TAG -f Dockerfile.dev .
-      #- docker run -e CI=true $IMAGE_REPO_NAME:$TEST_IMAGE_TAG npm run test
       - echo Build started on `date`
-      - echo Building the Docker image...
-      - docker build -t cicd-yasir:aws .
-      - docker tag cicd-yasir:aws 678878256416.dkr.ecr.us-east-1.amazonaws.com/cicd-yasir:aws
+      - echo Building the Docker image...          
+      - docker build -t push 678878256416.dkr.ecr.us-east-1.amazonaws.com/cicd-yasir:latest .
+      - docker tag push 678878256416.dkr.ecr.us-east-1.amazonaws.com/cicd-yasir:latest push 678878256416.dkr.ecr.us-east-1.amazonaws.com/cicd-yasir:latest
   post_build:
     commands:
       - echo Build completed on `date`
-      - echo Pushing the Docker image... 
-      - docker push 678878256416.dkr.ecr.us-east-1.amazonaws.com/cicd-yasir:aws 
+      - echo Pushing the Docker images...
+      - docker push 678878256416.dkr.ecr.us-east-1.amazonaws.com/cicd-yasir:latest
+      - docker push 678878256416.dkr.ecr.us-east-1.amazonaws.com/cicd-yasir:latest
+      #- echo Writing image definitions file...
+      #- printf '[{"name”:"__ECS_CONTAINER_NAME__","imageUri":"%s"}]' $REPOSITORY_URI:$IMAGE_TAG > imagedefinitions.json
+artifacts:
+  files: imagedefinitions.json
