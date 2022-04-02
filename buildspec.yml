@@ -30,7 +30,7 @@ phases:
     commands:
       - echo Build completed on `date`
       - echo Pushing the Docker image... 
-      - docker push cicd-yasir/awscodebuild
+      #- docker push cicd-yasir/awscodebuild
       - docker push 678878256416.dkr.ecr.us-east-1.amazonaws.com/cicd-yasir:aws2
 artifacts:
   files: imagedefinitions.json
