@@ -19,17 +19,18 @@ phases:
       - IMAGE_TAG=${COMMIT_HASH:=latest}
   build:
     commands:
+      #- echo Build started on `date`
+      #- echo Building Docker test image...
+      #- docker build -t $IMAGE_REPO_NAME:$TEST_IMAGE_TAG -f Dockerfile.dev .
+      #- docker run -e CI=true $IMAGE_REPO_NAME:$TEST_IMAGE_TAG npm run test
       - echo Build started on `date`
-      - echo Building the Docker image...          
-      - docker build -t push 678878256416.dkr.ecr.us-east-1.amazonaws.com/cicd-yasir:latest .
-      - docker tag push 678878256416.dkr.ecr.us-east-1.amazonaws.com/cicd-yasir:latest push 678878256416.dkr.ecr.us-east-1.amazonaws.com/cicd-yasir:latest
+      - echo Building the Docker image...
+      - docker build -t cicd-yasir:aws .
+      - docker tag cicd-yasir:aws 678878256416.dkr.ecr.us-east-1.amazonaws.com/cicd-yasir:aws
   post_build:
     commands:
       - echo Build completed on `date`
-      - echo Pushing the Docker images...
-      - docker push 678878256416.dkr.ecr.us-east-1.amazonaws.com/cicd-yasir:latest
-      - docker push 678878256416.dkr.ecr.us-east-1.amazonaws.com/cicd-yasir:latest
-      #- echo Writing image definitions file...
-      #- printf '[{"name”:"__ECS_CONTAINER_NAME__","imageUri":"%s"}]' $REPOSITORY_URI:$IMAGE_TAG > imagedefinitions.json
+      - echo Pushing the Docker image... 
+      - docker push 678878256416.dkr.ecr.us-east-1.amazonaws.com/cicd-yasir:aws 
 artifacts:
   files: imagedefinitions.json
