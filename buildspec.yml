@@ -25,8 +25,8 @@ phases:
       #- docker run -e CI=true $IMAGE_REPO_NAME:$TEST_IMAGE_TAG npm run test
       - echo Build started on `date`
       - echo Building the Docker image...
-      - docker build 678878256416.dkr.ecr.us-east-1.amazonaws.com/cicd-yasir .
-      #- docker build -t 678878256416.dkr.ecr.us-east-1.amazonaws.com/cicd-yasir:latest .
+      #- docker build 678878256416.dkr.ecr.us-east-1.amazonaws.com/cicd-yasir .
+      - docker build -t 678878256416.dkr.ecr.us-east-1.amazonaws.com/cicd-yasir:v1.0 .
       #- docker tag 678878256416.dkr.ecr.us-east-1.amazonaws.com/cicd-yasir:latest 678878256416.dkr.ecr.us-east-1.amazonaws.com/cicd-yasir:aws
       #- docker build 678878256416.dkr.ecr.us-east-1.amazonaws.com/cicd-yasir .
       #- docker tag 678878256416.dkr.ecr.us-east-1.amazonaws.com/cicd-yasir:latest 678878256416.dkr.ecr.us-east-1.amazonaws.com/cicd-yasir:latest
