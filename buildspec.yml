@@ -31,7 +31,7 @@ phases:
       #- docker build 678878256416.dkr.ecr.us-east-1.amazonaws.com/cicd-yasir .
       #- docker tag 678878256416.dkr.ecr.us-east-1.amazonaws.com/cicd-yasir:latest 678878256416.dkr.ecr.us-east-1.amazonaws.com/cicd-yasir:aws
       #- docker build 678878256416.dkr.ecr.us-east-1.amazonaws.com/cicd-yasir .
-      #- docker tag cicd-yasir:latest 678878256416.dkr.ecr.us-east-1.amazonaws.com/cicd-yasir:latest
+      - docker tag cicd-yasir:latest 678878256416.dkr.ecr.us-east-1.amazonaws.com/cicd-yasir:latest
   post_build:
     commands:
       - echo Build completed on `date`
