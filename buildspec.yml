@@ -27,7 +27,7 @@ phases:
       #- docker build -t 678878256416.dkr.ecr.us-east-1.amazonaws.com/cicd-yasir:latest .
       - echo Build started on `date`
       - echo Building the Docker image...          
-      - docker build -t cicd-yasir:latest  .S
+      - docker build -t cicd-yasir:latest .
       #- docker build 678878256416.dkr.ecr.us-east-1.amazonaws.com/cicd-yasir .
       #- docker tag 678878256416.dkr.ecr.us-east-1.amazonaws.com/cicd-yasir:latest 678878256416.dkr.ecr.us-east-1.amazonaws.com/cicd-yasir:aws
       #- docker build 678878256416.dkr.ecr.us-east-1.amazonaws.com/cicd-yasir .
